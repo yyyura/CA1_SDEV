@@ -1,0 +1,41 @@
+DROP TABLE Scart_Prod;
+DROP TABLE Prod_Supp;
+DROP TABLE ShopCart;
+DROP TABLE Product;
+DROP TABLE Supplier;
+
+CREATE TABLE ShopCart (
+    SC_ID INTEGER PRIMARY KEY    
+);
+
+CREATE TABLE Product (
+    PR_ID INTEGER PRIMARY KEY,
+    descr VARCHAR2(25),
+    price DECIMAL(4,2),
+    shelfnum VARCHAR2(25)
+);
+
+CREATE TABLE Scart_Prod (
+    SPR_ID INTEGER,
+    SC_ID INTEGER,
+    PR_ID INTEGER,
+    QTY INTEGER ,
+    PRIMARY KEY (SPR_ID),
+    FOREIGN KEY (SC_ID) REFERENCES ShopCart (SC_ID),
+    FOREIGN KEY (PR_ID) REFERENCES Product (PR_ID)
+);
+
+CREATE TABLE Supplier (
+    SUP_ID INTEGER PRIMARY KEY,
+    company VARCHAR2(25),
+    address VARCHAR2(25),
+    phone VARCHAR2(25)
+);
+
+CREATE TABLE Prod_Supp (
+    PR_ID INTEGER,
+    SUP_ID INTEGER,
+    PRIMARY KEY (PR_ID, SUP_ID),
+    FOREIGN KEY (PR_ID) REFERENCES Product (PR_ID),
+    FOREIGN KEY (SUP_ID) REFERENCES Supplier (SUP_ID)
+);
